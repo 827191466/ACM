@@ -1,0 +1,91 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int i,j,a,count,c,t,n,st,en,answer,tmp,flag;
+	cin>>t;
+	while(t--){		
+		cin>>n;
+		int *a=new int[n];
+		for(i=0;i<n;i++){
+			cin>>a[i];
+		}
+		c=0;
+		st=-1;
+		count=0;
+		answer=0;
+		flag=0;
+		while(st<n){
+			if(a[st]==-1)
+			{
+				count++;
+				st++;
+				continue;
+			}
+			for(j=st+1;j<n;j++){
+				if(a[j]==-1)
+					continue;
+				en=j;
+				break;
+			}
+			if(j!=n){
+				if(count==0)
+				{
+					if((a[en]-a[st])%(en-st)!=0)
+					{
+						answer++;
+						flag=0;
+					}					
+					else{
+						if(flag){
+							if(tmp==(a[en]-a[st])/(en-st))
+							{
+								tmp=(a[en]-a[st])/(en-st);
+							}
+							else
+								answer++;
+						}
+						else
+						{
+							tmp=(a[en]-a[st])/(en-st);
+							flag=1;
+						}													
+					}	
+					st=en;									
+				}
+				else{
+					if((a[en]-a[st])%(en-st)!=0)
+					{
+						answer++;
+						flag=0;
+					}					
+					else{
+						if(flag){
+							if(a[st]-(a[en]-a[st])/(en-st)*count<0)
+								answer++;
+							else{
+								if(tmp==(a[en]-a[st])/(en-st))
+								{
+									tmp=(a[en]-a[st])/(en-st);
+								}
+								else
+									answer++;
+							}							
+						}
+						else
+						{
+							tmp=(a[en]-a[st])%(en-st);
+							flag=1;
+						}													
+					}
+					st=en;										
+				}
+			}else
+		}
+			
+		delete[]a;		
+	}
+	return 0;
+}
+
